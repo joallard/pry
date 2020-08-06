@@ -38,6 +38,18 @@ class Pry
           end
         end
       end
+      
+      # Apply `color` and optional boldness to `text`
+      #
+      # @param color [Symbol] Color selected from `COLORS`
+      # @param text [String]
+      # @param bold [nil, true, false]
+      # @return [String] Text
+      def colorize(color, text, bold = false)
+        text
+          .then{ |it| bold ? bold(it) : it }
+          .then{ |it| send(color, it) }
+      end
 
       # Remove any color codes from _text_.
       #
